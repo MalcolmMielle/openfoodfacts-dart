@@ -60,6 +60,19 @@ class Product extends JsonObject {
   @JsonKey(name: 'traces_tags', includeIfNull: false)
   List<String> tracesTags;
 
+  @JsonKey(name: 'allergens')
+  String allergensFromIngredients;
+
+  @JsonKey(name: 'carbon_footprint_percent_of_known_ingredients')
+  double carbonFootprintPercentOfKnownIngredients;
+  @JsonKey(name: 'nova_group')
+  String novaGroup;
+  @JsonKey(name: 'nutrition_grades')
+  String nutritionGrades;
+
+
+
+
   Product({
     this.barcode,
     this.productName,
@@ -76,6 +89,10 @@ class Product extends JsonObject {
     this.nutrimentEnergy,
     this.nutrimentEnergyUnit,
     this.nutrimentDataPer,
+    this.allergensFromIngredients,
+    this.carbonFootprintPercentOfKnownIngredients,
+    this.novaGroup,
+    this.nutritionGrades,
   });
 
 

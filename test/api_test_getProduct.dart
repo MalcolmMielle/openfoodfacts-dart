@@ -1,5 +1,6 @@
 import 'package:openfoodfacts/utils/HttpHelper.dart';
 import 'package:flutter_test/flutter_test.dart';
+//import 'package:test/test.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:openfoodfacts/model/ProductImage.dart';
@@ -15,9 +16,9 @@ void main() {
   });
 
   group('$OpenFoodAPIClient get products', ()  {
-    test('get product Coca Cola Light', () async {
-      String barcode = "5000112548167";
-      ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
+    test('get product Pizza', () async {
+      String barcode = "3270160717668";
+      ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -25,27 +26,40 @@ void main() {
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
 
+
+      expect(result.product.carbonFootprintPercentOfKnownIngredients == 27.7, true);
+      expect(result.product.allergensFromIngredients == "en:gluten,en:milk", true);
+      expect(result.product.novaGroup == "3", true);
+      expect(result.product.nutritionGrades == "b", true);
+
+      print("carbon footprint: " + result.product.carbonFootprintPercentOfKnownIngredients.toString());
+      print("allergen: " + result.product.allergensFromIngredients.toString());
+      print("Nova group: " + result.product.novaGroup.toString());
+      print("Nutrition grade: " + result.product.nutritionGrades.toString());
+
+
       // only german ingredients
       expect(result.product.ingredientsText != null, true);
       expect(result.product.ingredientsTextDE == null, true);
       expect(result.product.ingredientsTextEN == null, true);
       expect(result.product.ingredientsTextFR == null, true);
 
-      print(result.product.ingredientsText);
+      print("ingredients: " + result.product.ingredientsText);
+
       expect(result.product.ingredients != null, true);
-      expect(result.product.ingredients.length, 10);
+      expect(result.product.ingredients.length, 28);
 
-      expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Kohlensäure"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Farbstoff E 150d"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Säuerungsmittel Phosphorsäure und Citronensäure"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"), true);
-
-      expect(result.product.ingredients.any((i) => i.text == "Natriumcyclamat"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Acesulfam K"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Aspartam"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Aroma"), true);
-      expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Wasser"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Kohlensäure"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Farbstoff E 150d"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Säuerungsmittel Phosphorsäure und Citronensäure"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Süßungsmittel"), true);
+//
+//      expect(result.product.ingredients.any((i) => i.text == "Natriumcyclamat"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Acesulfam K"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Aspartam"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Aroma"), true);
+//      expect(result.product.ingredients.any((i) => i.text == "Aroma Koffein"), true);
 
       expect(result.product.selectedImages.list.length, 9);
     });
@@ -53,6 +67,11 @@ void main() {
     test('get product Danish Butter Cookies & Chocolate Chip Cookies', () async {
       String barcode = "5701184005007";
       ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_DE);
+
+      print("carbon footprint: " + result.product.carbonFootprintPercentOfKnownIngredients.toString());
+      print("allergen: " + result.product.allergensFromIngredients.toString());
+      print("Nova group: " + result.product.novaGroup.toString());
+      print("Nutrition grade: " + result.product.nutritionGrades.toString());
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -99,12 +118,17 @@ void main() {
       String barcode = "20004361";
       ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
 
+      print("carbon footprint: " + result.product.carbonFootprintPercentOfKnownIngredients.toString());
+      print("allergen: " + result.product.allergensFromIngredients.toString());
+      print("Nova group: " + result.product.novaGroup.toString());
+      print("Nutrition grade: " + result.product.nutritionGrades.toString());
+
       expect(result != null, true);
       expect(result.status, 1);
       expect(result.barcode, barcode);
       expect(result.product != null, true);
       expect(result.product.barcode, barcode);
-      expect(result.product.productName, "Cornichon aigre doux");
+      expect(result.product.productName, "Pâte brisée");
 
       // only france ingredients
       expect(result.product.ingredientsText != null, true);
@@ -132,7 +156,7 @@ void main() {
       expect(result.product.ingredients.any((i) => i.text == "L-cystéine"), true);
 
       expect(result.product.selectedImages.list.length, 9);
-      expect(result.product.selectedImages.list.where((image) => image.language == User.LANGUAGE_FR).length, 9);
+      expect(result.product.selectedImages.list.where((image) => image.language == User.LANGUAGE_FR).length, 6);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_FRONT).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_INGREDIENTS).length, 3);
       expect(result.product.selectedImages.list.where((image) => image.field == ProductImage.FIELD_NUTRITION).length, 3);

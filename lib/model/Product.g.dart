@@ -8,21 +8,28 @@ part of 'Product.dart';
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
   return Product(
-      barcode: json['code'] as String,
-      productName: json['product_name'] as String,
-      productNameDE: json['product_name_de'] as String,
-      productNameEN: json['product_name_en'] as String,
-      brands: json['brands'] as String,
-      lang: json['lang'] as String,
-      quantity: json['quantity'] as String,
-      imgSmallUrl: json['image_small_url'] as String,
-      ingredientsText: json['ingredients_text'] as String,
-      ingredientsTextDE: json['ingredients_text_de'] as String,
-      ingredientsTextEN: json['ingredients_text_en'] as String,
-      categories: json['categories'] as String,
-      nutrimentEnergy: json['nutriment_energy'] as String,
-      nutrimentEnergyUnit: json['nutriment_energy_unit'] as String,
-      nutrimentDataPer: json['nutrition_data_per'] as String)
+    barcode: json['code'] as String,
+    productName: json['product_name'] as String,
+    productNameDE: json['product_name_de'] as String,
+    productNameEN: json['product_name_en'] as String,
+    brands: json['brands'] as String,
+    lang: json['lang'] as String,
+    quantity: json['quantity'] as String,
+    imgSmallUrl: json['image_small_url'] as String,
+    ingredientsText: json['ingredients_text'] as String,
+    ingredientsTextDE: json['ingredients_text_de'] as String,
+    ingredientsTextEN: json['ingredients_text_en'] as String,
+    categories: json['categories'] as String,
+    nutrimentEnergy: json['nutriment_energy'] as String,
+    nutrimentEnergyUnit: json['nutriment_energy_unit'] as String,
+    nutrimentDataPer: json['nutrition_data_per'] as String,
+    allergensFromIngredients: json['allergens'] as String,
+    carbonFootprintPercentOfKnownIngredients:
+        (json['carbon_footprint_percent_of_known_ingredients'] as num)
+            ?.toDouble(),
+    novaGroup: json['nova_group'] as String,
+    nutritionGrades: json['nutrition_grades'] as String,
+  )
     ..productNameFR = json['product_name_fr'] as String
     ..selectedImages = json['selected_images'] == null
         ? null
@@ -77,5 +84,10 @@ Map<String, dynamic> _$ProductToJson(Product instance) {
   writeNotNull('misc', instance.miscTags);
   writeNotNull('states_tags', instance.statesTags);
   writeNotNull('traces_tags', instance.tracesTags);
+  val['allergens'] = instance.allergensFromIngredients;
+  val['carbon_footprint_percent_of_known_ingredients'] =
+      instance.carbonFootprintPercentOfKnownIngredients;
+  val['nova_group'] = instance.novaGroup;
+  val['nutrition_grades'] = instance.nutritionGrades;
   return val;
 }
