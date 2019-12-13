@@ -27,7 +27,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
     carbonFootprintPercentOfKnownIngredients:
         (json['carbon_footprint_percent_of_known_ingredients'] as num)
             ?.toDouble(),
-    novaGroup: json['nova_group'] as String,
+    novaGroup: json['nova_group'] as int,
     nutritionGrades: json['nutrition_grades'] as String,
   )
     ..productNameFR = json['product_name_fr'] as String

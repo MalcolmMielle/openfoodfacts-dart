@@ -66,7 +66,7 @@ class Product extends JsonObject {
   @JsonKey(name: 'carbon_footprint_percent_of_known_ingredients')
   double carbonFootprintPercentOfKnownIngredients;
   @JsonKey(name: 'nova_group')
-  String novaGroup;
+  int novaGroup;
   @JsonKey(name: 'nutrition_grades')
   String nutritionGrades;
 
