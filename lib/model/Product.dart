@@ -17,6 +17,8 @@ class Product extends JsonObject {
   String productNameEN;
   @JsonKey(name: 'product_name_fr', includeIfNull: false)
   String productNameFR;
+  @JsonKey(name: 'generic_name', nullable: false)
+  String productGenericName;
   String brands;
   String lang;
   String quantity;
@@ -78,6 +80,7 @@ class Product extends JsonObject {
     this.productName,
     this.productNameDE,
     this.productNameEN,
+    this.productGenericName,
     this.brands,
     this.lang,
     this.quantity,

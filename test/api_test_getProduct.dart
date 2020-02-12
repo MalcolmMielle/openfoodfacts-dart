@@ -16,9 +16,11 @@ void main() {
   });
 
   group('$OpenFoodAPIClient get products', ()  {
-    test('get product Pizza', () async {
-      String barcode = "3270160717668";
-      ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
+    test('get product Mustard', () async {
+      String barcode = "3036810201280";
+      ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_UNDEFINED);
+
+      print("Generic name: " + result.product.productGenericName);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -27,11 +29,12 @@ void main() {
       expect(result.product.barcode, barcode);
 
 
-      expect(result.product.carbonFootprintPercentOfKnownIngredients == 27.7, true);
-      expect(result.product.allergensFromIngredients == "en:gluten,en:milk", true);
-      expect(result.product.novaGroup == "3", true);
-      expect(result.product.nutritionGrades == "b", true);
+//      expect(result.product.carbonFootprintPercentOfKnownIngredients == 27.7, true);
+//      expect(result.product.allergensFromIngredients == "en:gluten,en:milk", true);
+//      expect(result.product.novaGroup == "3", true);
+//      expect(result.product.nutritionGrades == "b", true);
 
+      print("Name " + result.product.productName);
       print("carbon footprint: " + result.product.carbonFootprintPercentOfKnownIngredients.toString());
       print("allergen: " + result.product.allergensFromIngredients.toString());
       print("Nova group: " + result.product.novaGroup.toString());
@@ -72,6 +75,7 @@ void main() {
       print("allergen: " + result.product.allergensFromIngredients.toString());
       print("Nova group: " + result.product.novaGroup.toString());
       print("Nutrition grade: " + result.product.nutritionGrades.toString());
+      print("Generic name: " + result.product.productGenericName);
 
       expect(result != null, true);
       expect(result.status, 1);
@@ -117,6 +121,7 @@ void main() {
     test('get product Cornichon aigre doux', () async {
       String barcode = "20004361";
       ProductResult result = await OpenFoodAPIClient.getProduct(barcode, User.LANGUAGE_FR);
+      print("Generic name: " + result.product.productGenericName);
 
       print("carbon footprint: " + result.product.carbonFootprintPercentOfKnownIngredients.toString());
       print("allergen: " + result.product.allergensFromIngredients.toString());
